@@ -1,0 +1,55 @@
+import os
+import shutil
+folder = 'D:/SomeDir/SomeFolder/TargetFolder/'
+<p> make sure there is a '/' at the end of the 'folder' string <p>
+
+def cleaner(folder):
+    <p> make folders to store all files of same category: </p>
+    os.mkdir(folder+'documents')
+    <p> make TUPLES of required extensions as strings -- WITHOUT '.' </p>
+    document_types = ('docx', 'pdf', 'txt', 'doc')
+
+    <p> some more examples: </p> 
+    os.mkdir(folder+'spreadsheets')
+    spreadsheet_types = ('xlsx', 'xlm', 'csv')
+
+    os.mkdir(folder+'audio')
+    audio_types = ('mp3', 'wav', 'wma')
+
+    os.mkdir(folder+'video')
+    video_types = ('mp4', 'wmv')
+
+
+    <p> read all files in path </p> 
+    for i in os.listdir(folder):
+        <p>  get the extension/filetype by splitting filename </p> 
+        type = i.split('.')
+        type = type[len(type)-1]
+        copy_flag = False
+
+        <p> check filetypes and sort into required folders if you changed the folder name above change it here too </p>
+        if type.lower() in document_types:
+            shutil.copy(folder+i, folder+'documents')
+            copy_flag = True
+
+        <p> do this to as many categories as required. Only change tuple and path above </p>
+        if type.lower() in spreadsheet_types:
+            shutil.copy(folder+i, folder+'spreadsheets')
+            copy_flag = True
+        if type.lower() in audio_types:
+            shutil.copy(folder+i, folder+'audio')
+            copy_flag = True
+        if type.lower() in video_types:
+            shutil.copy(folder+i, folder+'video')
+            copy_flag = True
+
+        if copy_flag == True:
+            print('done')
+        <p> ONLY uncomment os.remove once you test the programme </p>
+        <p> this step may lead to file loss if previous results were not checked properly! </p>
+            # os.remove(i)
+
+<p>  now once you go through the code and confirm your paths, categories and extensions</p>
+<p> run the code, but make sure os.remove(i) is commented until you run proper tests </p>
+
+# cleaner(folder)
